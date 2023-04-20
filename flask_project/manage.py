@@ -6,6 +6,18 @@ app = Flask(__name__)
 def home():
     return 'Welcome to my Flask app!'
 
+@app.route('/greetings')
+def greetings():
+    return """
+    <h1>Seasonal Greetings</h1>
+    <ul>
+        <li>Merry Christmas!</li>
+        <li>Happy New Year!</li>
+        <li>Happy Easter!</li>
+        <li>Happy Halloween!</li>
+    </ul>
+    """
+
 @app.route('/greetings/christmas')
 def christmas():
     return 'Merry Christmas!'
