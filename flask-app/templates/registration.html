@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Registration</title>
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <h1>Employee Registration Form</h1>
+  <form method="POST" action="{{ url_for('add_employee') }}">
+    <label for="EmpID">EmpID:</label>
+    <input type="text" id="EmpID" name="EmpID" required>
+    <br>
+    <label for="EmpName">EmpName:</label>
+    <input type="text" id="EmpName" name="EmpName" required>
+    <br>
+    <label for="EmpGender">EmpGender:</label>
+    <select id="EmpGender" name="EmpGender" required>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+    <br>
+    <label for="EmpPhone">EmpPhone:</label>
+    <input type="tel" id="EmpPhone" name="EmpPhone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+required>
+    <small>Format: 123-456-7890</small>
+    <br>
+    <label for="EmpBdate">EmpBdate:</label>
+    <input type="date" id="EmpBdate" name="EmpBdate" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
+
