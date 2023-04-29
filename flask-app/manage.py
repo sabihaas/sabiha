@@ -7,11 +7,11 @@ app.secret_key = "secret key"
 conn = sqlite3.connect('employees.db')
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS employees (
-        EMPID INTEGER PRIMARY KEY AUTOINCREMENT,
-        EMPName TEXT,
-        EMPGender TEXT,
-        EMPPhone TEXT,
-        EMPBdate DATE)''')
+        EmpID INTEGER PRIMARY KEY,
+        EmpName TEXT,
+        EmpGender TEXT,
+        EmpPhone TEXT,
+        EmpBdate DATE)''')
 print("Table created")
 conn.close()
 
@@ -22,14 +22,14 @@ def home():
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':
-        empname = request.form['EMPName']
-        empgender = request.form['EMPGender']
-        empphone = request.form['EMPPhone']
-        empbdate = request.form['EMPBdate']
+        empname = request.form['EmpName']
+        empgender = request.form['EmpGender']
+        empphone = request.form['EmpPhone']
+        empbdate = request.form['EmpBdate']
 
         conn = sqlite3.connect('employees.db')
         c = conn.cursor()
-        c.execute("INSERT INTO employees (EMPName, EMPGender, EMPPhone, EMPBdate) VALUES (?, ?, ?, ?)" , (empname, empgender, empphone, empbdate))
+        c.execute("INSERT INTO employees (EmpName, EmpGender, EmpPhone, EmpBdate) VALUES (?, ?, ?, ?)" , (empname, empgender, empphone, empbdate))
         conn.commit()
         conn.close()
 
