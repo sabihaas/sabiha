@@ -9,8 +9,8 @@ app.secret_key = "secret key"
 conn = mysql.connector.connect(
     host='localhost',
     user='flask',
-    password='ubuntu',
-    database='flask'
+    password='password',
+    database='employees'
 )
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS employees (
@@ -30,16 +30,16 @@ def home():
 def registration():
     if request.method == 'POST':
         empname = request.form['EmpName']
-        empgender = request.form['Emp[Gender']
+        empgender = request.form['EmpGender']
         empphone = request.form['EmpPhone']
         empbdate = request.form['EmpBdate']
 
         conn = mysql.connector.connect(
-		host='localhost',
-		user='flask',
-		password='ubuntu',
-		database='flask'
-	)
+            host='localhost',
+            user='flask',
+            password='password',
+            database='employees'
+        )
         c = conn.cursor()
         c.execute("INSERT INTO employees (EmpName, EmpGender, EmpPhone, EmpBdate) VALUES ('{0}', '{1}', '{2}', '{3}')".format(empname, empgender, empphone, empbdate))
         conn.commit()
@@ -52,10 +52,10 @@ def registration():
 @app.route('/information')
 def information():
     conn = mysql.connector.connect(
-    	host='localhost',
-    	user='flask',
-    	password='ubuntu',
-    	database='flask'
+        host='localhost',
+        user='flask',
+        password='password',
+        database='employees'
     )
     cur = conn.cursor()
     cur.execute("SELECT * FROM employees")
