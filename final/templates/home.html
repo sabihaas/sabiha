@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+      h1 {
+        font-size: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Food Ordering System</h1>
+    <img src="images/burger.jpeg">
+    <ul>
+      <li><a href="{{ url_for('menu') }}">Menu</a></li>
+      <li><a href="{{ url_for('place_order') }}">Place Order</a></li>
+      <li><a href="{{ url_for('order_history') }}">Order History</a></li>
+    </ul>
+  </body>
+</html>
