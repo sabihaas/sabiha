@@ -1,5 +1,5 @@
-import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, flash
+import sqlite3
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = "secret key"
