@@ -1,10 +1,17 @@
+import mysql.connector
 from flask import Flask, render_template, request, redirect, url_for, flash
-import sqlite3
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = "secret key"
+Bootstrap(app)
 
-conn = sqlite3.connect('food.db')
+conn = mysql.connector.connect(
+    host='localhost',
+    user='flask',
+    password='password',
+    database='food'
+)
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS orders (
         OrderID INTEGER PRIMARY KEY,
@@ -37,9 +44,14 @@ def place_order():
         item_price = request.form['item_price']
         order_date = request.form['order_date']
 
-        conn = sqlite3.connect('food.db')
+        conn = mysql.connector.connect(
+            host='localhost',
+            user='flask',
+            password='password',
+            database='food'
+        )
         c = conn.cursor()
-        c.execute("INSERT INTO orders (CustomerName, ItemName, ItemPrice, OrderDate) VALUES (?, ?, ?, ?)" , (name, item_name, item_price, order_date))
+        c.execute("INSERT INTO orders (CustomerName, ItemName, ItemPrice, OrderDate) VALUES (%s, %s, %s, %s)", (name, item_name, item_price, order_date))
         conn.commit()
         conn.close()
 
@@ -55,10 +67,16 @@ def place_order():
 
 @app.route('/order_history')
 def order_history():
-    with sqlite3.connect('food.db') as con:
-        cur = con.cursor()
-        cur.execute("SELECT * FROM orders")
-        rows = cur.fetchall()
+    conn = mysql.connector.connect(
+        host='localhost',
+        user='flask',
+        password='password',
+        database='food'
+    )
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM orders")
+    rows = cur.fetchall()
+    conn.close()
     return render_template('order_history.html', rows=rows)
 
 if __name__ == '__main__':

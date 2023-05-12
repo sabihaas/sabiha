@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Place Order</title>
-  </head>
-  <body>
+{% extends "bootstrap/base.html" %}
+
+<!-- {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+{% endblock %} -->
+
+{% block content %}
     <h1>Place Order</h1>
     <form method="POST" action="{{ url_for('place_order') }}">
       <label for="name">Customer Name:</label>
@@ -20,5 +21,7 @@
       <input type="date" id="order_date" name="order_date"><br><br>
       <input type="submit" value="Place Order">
     </form>
+    <button onclick="location.href='{{ url_for('home') }}'">Back to Home</button>
   </body>
 </html>
+{% endblock %}
